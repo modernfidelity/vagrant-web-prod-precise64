@@ -1,29 +1,103 @@
-include iptables::disable
-include iscsid::disable
-include yum-updatesd::disable
-include selinux
-include wordpress
-include index
-class { 'apache':
-  listen_ports => ['80','8081']
-}
-class { 'varnish':
-  backend_port => '8081'
+# Basic Puppet Apache manifest
+
+
+# PUPPET
+# --------------------------
+
+class groups {
+
+  group { "puppet":
+      ensure => present,
+  }
+
 }
 
-apache::config::module{
-  'proxy_module':
-    modpath => 'modules/mod_proxy.so';
-  'status_module':
-    modpath => 'modules/mod_status.so';
-  'authz_host_module':
-    modpath => 'modules/mod_authz_host.so';
-  'mime_module':
-    modpath => 'modules/mod_mime.so';
-  'dir_module':
-    modpath => 'modules/mod_dir.so';
-  'alias_module':
-    modpath => 'modules/mod_alias.so';
-  'autoindex_module':
-    modpath => 'modules/mod_autoindex.so';
+
+
+# SYSTEM-UPDATE
+# --------------------------
+
+
+class system-update {
+
+
+  $sysPackages = [ "build-essential" ]
+
+  exec { 'apt-get update':
+   command => '/usr/bin/apt-get update --fix-missing'
+  }
+
+  package { $sysPackages:
+    ensure => "installed",
+    
+  }
+
 }
+
+
+# APACHE
+# --------------------------
+
+class apache {
+
+
+
+  package { "apache2":
+    ensure => present,
+  }
+
+  service { "apache2":
+    ensure => running,
+    require => Package["apache2"],
+  }
+
+  file { '/var/www':
+    ensure => link,
+    target => "/vagrant",
+    notify => Service['apache2'],
+    force  => true
+  }
+
+
+  #file { "default-apache2":
+  #  path    => "/etc/apache2/sites-available/default",
+  #  ensure  => file,
+  #  require => Package["apache2"],
+  #  source  => "puppet:///modules/apache2/default",
+  #  notify  => Service["apache2"]
+  #}
+
+
+}
+
+# PHP
+# --------------------------
+
+class php {
+
+  package { "php5":
+    ensure => present,
+  }
+ 
+  package { "php5-cli":
+    ensure => present,
+  }
+ 
+  package { "php5-mysql":
+    ensure => present,
+  }
+ 
+  package { "libapache2-mod-php5":
+    ensure => present,
+  }
+}
+ 
+
+# --------------------------
+
+
+include groups
+include system-update
+
+include apache
+include php
