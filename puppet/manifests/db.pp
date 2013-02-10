@@ -36,18 +36,6 @@ class system-update {
 
 
 
-# NGINX
-# --------------------------
-
-class nginx {
- 
-  package { "nginx":
-    ensure => latest,
-  }
-
-
-}
-
 
 
 
@@ -107,5 +95,4 @@ class mysql {
 
 include groups
 include system-update
-include nginx
 include mysql

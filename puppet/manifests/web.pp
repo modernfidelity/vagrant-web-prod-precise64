@@ -51,12 +51,12 @@ class apache {
     require => Package["apache2"],
   }
 
-  #file { '/var/www':
-  #  ensure => link,
-  #  target => "/vagrant",
-  #  notify => Service['apache2'],
-  #  force  => true
-  #}
+  file { '/var/www':
+    ensure => link,
+    target => "/vagrant/www",
+    notify => Service['apache2'],
+    force  => true
+  }
 
 
   #file { "default-apache2":
@@ -79,10 +79,19 @@ class php {
     ensure => present,
   }
  
+  package { "php-apc":
+    ensure => present,
+  }
+
   package { "php5-cli":
     ensure => present,
   }
  
+  package { "php5-gd":
+    ensure => present,
+  }
+
+
   package { "php5-mysql":
     ensure => present,
   }
