@@ -82,14 +82,13 @@ class nginx {
 # VARNISH
 # --------------------------
 
-class varnish {
+#class varnish {
  
-  package { "varnish":
-    ensure => latest,
-  }
+#  package { "varnish":
+#    ensure => latest,
+#  }
 
-
-}
+#}
 
 # --------------------------
 
@@ -98,4 +97,4 @@ include groups
 include system-update
 include nginx
 
-include varnish
+

@@ -51,12 +51,12 @@ class apache {
     require => Package["apache2"],
   }
 
-  file { '/var/www':
-    ensure => link,
-    target => "/vagrant",
-    notify => Service['apache2'],
-    force  => true
-  }
+  #file { '/var/www':
+  #  ensure => link,
+  #  target => "/vagrant",
+  #  notify => Service['apache2'],
+  #  force  => true
+  #}
 
 
   #file { "default-apache2":
