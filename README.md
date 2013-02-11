@@ -1,10 +1,11 @@
 Vagrant Multi VM Environment
 ============================
 
-##This code provides VagrantFile + Puppet files for a standalone web prod environment, consisting of multi VMs.
+This code provides VagrantFile + Puppet files for a standalone web prod environment, consisting of multi VMs.
 
 
-###Instructions
+Instructions
+------------
 
 Make sure you have installed the Vagrant software : http://www.vagrantup.com/
 
@@ -17,7 +18,8 @@ Run the following command :
 vagrant up
 ```
 
-### Machines
+Machines
+--------
 
 This will then build the following vm boxes : 
 
@@ -38,11 +40,9 @@ This will then build the following vm boxes :
 
 These VMs are based on Ubuntu Precise 64 Bit => http://files.vagrantup.com/precise64.box
 
-### Notes
-
-*Please note*
-
-You might get port errors if you are running other services on those ports. 
+Notes
+-----
+*Please note - you might get port errors if you are running other services on those ports. 
 
 If this does occur you will need to either change your current service running on that port to another 
 or amend the VagrantFile and amend the port to be used there...
