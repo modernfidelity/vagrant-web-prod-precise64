@@ -92,7 +92,7 @@ Vagrant::Config.run do |config|
     
     config.vm.host_name = "db.local"
     config.vm.network :hostonly, "33.33.33.33"
-    config.vm.forward_port(3306,3306)
+    config.vm.forward_port(3306,3033)
 
     # Set the Timezone to something useful
     # config.vm.provision :shell, :inline => "echo \"Europe/London\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
