@@ -1,7 +1,7 @@
 Vagrant Multi VM Environment
 ============================
 
-This code provides VagrantFile + Puppet files for a standalone web prod environment, consisting of multi VMs.
+This code provides VagrantFile + Puppet manifest scripts, which will create a standalone web prod environment, consisting of multi VMs, within your local development environment.
 
 
 Instructions
@@ -44,5 +44,5 @@ Notes
 -----
 *Please note - you might get port errors if you are running other services on those ports. 
 
-If this does occur you will need to either change your current service running on that port to another 
-or amend the VagrantFile and amend the port to be used there...
+If this does occur you will need to either change your current service running on that specific port to another 
+or amend the VagrantFile config file...
