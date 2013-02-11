@@ -23,19 +23,13 @@ Machines
 
 This will then build the following vm boxes : 
 
-
- - Load Balancer { varnish, niginx}
- 
-   33.33.33.30 (port forward 3030)
-
- - 2x Web { php, apache}
-
-   33.33.33.31 (port forward 3031)
-   33.33.33.32 (port forward 3032)
-  
- - Database { MySQL }
-
-   33.33.33.33 (port forward 3033)
+- <strong>Load Balancer { varnish, niginx}</strong>
+  - *33.33.33.30 (port forward 3030)*  
+- <strong>2x Web { php, apache}</strong>
+    - *33.33.33.31 (port forward 3031)*
+    - *33.33.33.32 (port forward 3032)* 
+- <strong>Database { MySQL }</strong>
+    - *33.33.33.33 (port forward 3033)*
 
 
 These VMs are based on Ubuntu Precise 64 Bit => http://files.vagrantup.com/precise64.box
