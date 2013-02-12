@@ -7,11 +7,14 @@ This code provides VagrantFile + Puppet manifest scripts, which will create a st
 Instructions
 ------------
 
-Make sure you have installed the Vagrant software : http://www.vagrantup.com/
+- Make sure you have installed the Vagrant software : http://www.vagrantup.com/
 
-Clone this repo and cd into the directory. 
+ - Download links are here -> http://downloads.vagrantup.com/
+ - For Windows users; at the time of writing this worked -> http://zamboni.readthedocs.org/en/latest/topics/install-zamboni/vagrant-on-windows.html
 
-Run the following command : 
+- Clone this repo and cd into the directory. 
+
+- Run the following command : 
 
 
 ```bash
