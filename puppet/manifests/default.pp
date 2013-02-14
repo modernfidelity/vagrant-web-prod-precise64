@@ -1,5 +1,5 @@
 
-# Basic Puppet Apache manifest
+# Basic Puppet Default manifest
 
 
 # PUPPET

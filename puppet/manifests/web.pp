@@ -1,4 +1,4 @@
-# Basic Puppet Apache manifest
+# Basic Puppet Apache Webserver manifest
 
 
 # PUPPET

@@ -1,4 +1,4 @@
-# Basic Puppet Apache manifest
+# Basic Puppet Load Balancer manifest
 
 
 # PUPPET
