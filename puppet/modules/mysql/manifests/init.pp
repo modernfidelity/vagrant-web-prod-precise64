@@ -51,7 +51,14 @@ class mysql {
  
   }
  
-
+  
+  file {'my.cnf':
+    owner   => root,
+    group   => root,
+    mode    => 0640,
+    path    =>  '/etc/mysql/my.cnf',
+    source  =>  '/vagrant/puppet/modules/mysql/templates/my.cnf',
+  }
 
 
 
