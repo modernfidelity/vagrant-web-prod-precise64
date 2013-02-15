@@ -1,35 +1,18 @@
-# Class: mysql
+# Class: MYSQL 
 #
-#   This class installs mysql client software.
+#   This class installs mysql client software, configure password, creates a database and imports
+#   a database.sql from the shared www folder if it exists...
 #
-# Parameters:
-#   [*client_package_name*]  - The name of the mysql client package.
 #
-# Actions:
+# @TODO : 
 #
-# Requires:
 #
-# Sample Usage:
 #
-
-
-#class mysql (
-#  $package_name   = $mysql::params::client_package_name,
-#  $package_ensure = 'present'
-#) inherits mysql::params {
-
-#  package { 'mysql_client':
-#    name    => $package_name,
-#    ensure  => $package_ensure,
-#  }
-
-#}
-
-
 
 
 
 class mysql {
+
 
   package {
     ["mysql-client", "mysql-server", "libmysqlclient-dev"]: 
@@ -51,7 +34,7 @@ class mysql {
  
   }
  
-  
+
   file {'my.cnf':
     owner   => root,
     group   => root,
@@ -60,13 +43,29 @@ class mysql {
     source  =>  '/vagrant/puppet/modules/mysql/templates/my.cnf',
   }
 
+  
+  exec { "database-create":
+    unless  => "/usr/bin/mysql -uroot -proot drupal",
+    #command => "/usr/bin/mysql -uroot -proot -e \"create database ; grant all on my_website.* to vagrant@localhost identified by 'vagrant';\"",
+    command => "/usr/bin/mysql -uroot -proot -e \"create database my_website; \"",
+    require => Service["mysql"],
+  }
 
 
-  #exec { "create-database":
-  #  unless  => "/usr/bin/mysql -usite_development -psite_development site_development",
-  #  command => "/usr/bin/mysql -uroot -proot -e \"create database site_development; grant all on site_development.* to site_dev@localhost identified by 'site_development';\"",
-  #  require => Service["mysql"],
-  #}
+  exec { "database-import":
+
+    onlyif => '/usr/bin/test -f /vagrant/www/database.sql',
+    command     => "/usr/bin/mysql -uroot -proot my_website < /vagrant/www/database.sql",
+    logoutput   => true,
+
+    
+  }
+
+
+  # RESOURCES RUN ORDER
+
+  SERVICE['mysql'] -> EXEC['set-mysql-password'] -> EXEC['database-create'] -> EXEC['database-import']
+
 
 
 }
