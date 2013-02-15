@@ -57,14 +57,20 @@ class mysql {
     onlyif => '/usr/bin/test -f /vagrant/www/database.sql',
     command     => "/usr/bin/mysql -uroot -proot my_website < /vagrant/www/database.sql",
     logoutput   => true,
-
     
+  }
+
+
+  exec { "database-perms":
+    command => "/usr/bin/mysql -uroot -proot -e \"GRANT ALL ON *.* TO root@'%' IDENTIFIED BY 'root';flush privileges;\"",
+    require => Service["mysql"],
+ 
   }
 
 
   # RESOURCES RUN ORDER
 
-  SERVICE['mysql'] -> EXEC['set-mysql-password'] -> EXEC['database-create'] -> EXEC['database-import']
+  SERVICE['mysql'] -> EXEC['set-mysql-password'] -> EXEC['database-create'] -> EXEC['database-import'] -> EXEC['database-perms']
 
 
 
