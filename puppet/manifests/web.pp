@@ -59,6 +59,8 @@ class apache {
   }
 
 
+
+
   #file { "default-apache2":
   #  path    => "/etc/apache2/sites-available/default",
   #  ensure  => file,
@@ -67,6 +69,23 @@ class apache {
   #  notify  => Service["apache2"]
   #}
 
+
+}
+
+
+# MEMCACHE
+# --------------------------
+
+class memcached {
+
+  package { "memcached":
+    ensure => present,
+  }
+
+  service { "memcached":
+    ensure => running,
+    require => Package["memcached"],
+  }
 
 }
 
@@ -92,6 +111,14 @@ class php {
   }
 
 
+  package { "php-pear":
+    ensure => present,
+  }
+
+  package { "php5-memcache":
+    ensure => present,
+  }
+
   package { "php5-mysql":
     ensure => present,
   }
@@ -99,6 +126,7 @@ class php {
   package { "libapache2-mod-php5":
     ensure => present,
   }
+
 }
  
 
@@ -107,6 +135,6 @@ class php {
 
 include groups
 include system-update
-
+include memcached
 include apache
 include php
