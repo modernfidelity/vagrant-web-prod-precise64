@@ -82,13 +82,26 @@ class nginx {
 # VARNISH
 # --------------------------
 
-#class varnish {
+class varnish {
  
-#  package { "varnish":
-#    ensure => latest,
-#  }
+  package { "varnish":
+    ensure => latest,
+  }
 
-#}
+  file {'varnish.vcl':
+    owner   => root,
+    group   => root,
+    mode    => 0640,
+    path    =>  '/etc/varnish/default.vcl',
+    source  =>  '/vagrant/puppet/files/varnish.vcl',
+  }
+
+
+
+
+
+
+}
 
 # --------------------------
 
@@ -96,5 +109,5 @@ class nginx {
 include groups
 include system-update
 include nginx
-
+include varnish
 
