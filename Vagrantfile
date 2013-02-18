@@ -1,3 +1,14 @@
+#
+# CUSTOM VAGRANTFILE FOR USE WITH VAGRANT SYSTEM (+VIRTUALBOX)
+# 
+# This will generate a standard web production environment, consisting of a 
+# load balancer (NGINX + VARNISH), 2x web server (APACHE+PHP+MEMCACHE) and a database (MYSQL). 
+#
+# Dependencies -> Vagrant, Virtualbox and Ruby. 
+#                 Internet connection is also required for the specifc updates calls
+#
+#
+
 Vagrant::Config.run do |config|
 
 
@@ -12,6 +23,8 @@ Vagrant::Config.run do |config|
     config.vm.host_name = "lb.local"
     config.vm.network :hostonly, "33.33.33.30"
     config.vm.forward_port(80,3030)
+
+    
 
     # Set the Timezone to something useful
     # config.vm.provision :shell, :inline => "echo \"Europe/London\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
@@ -46,7 +59,8 @@ Vagrant::Config.run do |config|
     # Update the server
     config.vm.provision :shell, :inline => "apt-get update --fix-missing"
 
-   
+    #config.vm.share_folder("v-root", "/vagrant/www", ".", :nfs => true)
+      
     config.vm.provision :puppet, :module_path => "puppet/modules" do |puppet|
       puppet.manifests_path = "puppet/manifests"
       puppet.manifest_file = "web.pp"
