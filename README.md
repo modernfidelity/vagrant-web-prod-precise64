@@ -3,7 +3,7 @@ Vagrant Multi VM Environment (Ubuntu 12.04 LTS)
 
 This code provides VagrantFile + Puppet manifest scripts, which will create a standalone web prod environment, consisting of multi VMs, within your local development environment.
 
- - <a href="https://github.com/modernfidelity/vagrant-web-prod-lucid32">Click here a complete version running Ubuntu 10.04 LTS</a>
+ - <a href="https://github.com/modernfidelity/vagrant-web-prod-lucid64">Click here a complete version running Ubuntu 10.04 LTS</a>
 
 
 Instructions
